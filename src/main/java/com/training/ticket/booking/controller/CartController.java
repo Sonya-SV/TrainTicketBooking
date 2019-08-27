@@ -61,7 +61,7 @@ public class CartController {
                 .passenger(user)
                 .build();
         if (user.getBalance().compareTo(train.getPrice()) >= 0) {
-            userService.updateAccount(user,train.getPrice());
+            userService.updateAccount(user,train.getPrice().negate());
             trainService.bookTheTicket(train);
             ticketService.saveTicket(ticket);
             return "redirect:/history";

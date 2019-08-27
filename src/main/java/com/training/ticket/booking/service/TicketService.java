@@ -18,9 +18,7 @@ public class TicketService {
     private TicketRepository ticketRepository;
 
     public Set<Ticket> findAllByPassenger(User passenger){
-//
         return ticketRepository.findAllByPassengerOrderByIdDesc(passenger);
-//        return ticketRepository.findAll();
     }
 
     public void saveTicket(Ticket ticket)throws DataIntegrityViolationException {

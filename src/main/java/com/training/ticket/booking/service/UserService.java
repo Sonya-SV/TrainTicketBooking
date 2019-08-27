@@ -33,19 +33,14 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public void updateUserByAdmin(User user, String username, Map<String,String > form) throws DataIntegrityViolationException {
-
+    public void updateUserByAdmin(User user, String username, Map<String, String> form) throws DataIntegrityViolationException {
         user.setUsername(username);
-
         Set<String> roles = Arrays.stream(Role.values()).map(Role::name)
                 .collect(Collectors.toSet());
-
         user.getRoles().clear();
-
-        for(String key : form.keySet()){
-            if(roles.contains(key))
-                user.getRoles().add(Role.valueOf(key));
-        }
+        form.keySet().stream()
+                .filter(roles::contains)
+                .forEach((key) -> user.getRoles().add(Role.valueOf(key)));
         try {
             userRepository.save(user);
         } catch (Exception ex) {
@@ -57,13 +52,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-//TODO rewrite Optional!!!
-    public void updateProfile(User user, String firstName, String lastName, String password){
-        if(firstName!= null && !firstName.equals(user.getFirstName()))
-            user.setFirstName(firstName);
-        if(lastName!= null && !lastName.equals(user.getLastName()));
-            user.setLastName(lastName);
-
+    //TODO rewrite Optional!!!
+    public void updateProfile(User user, String firstName, String lastName, String password) {
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setPassword(passwordEncoder.encode(user.getPassword())); /// was password <- user.getPassword
         userRepository.save(user);
     }
@@ -75,17 +67,16 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
         } catch (Exception ex) {
             log.info("{User is already exists}");
-            log.info(user.toString());
         }
     }
 
     public void updateAccount(User user, BigDecimal replenishmentAmount) {
         user.setBalance(user.getBalance().add(replenishmentAmount));
-//        try {
-            userRepository.save(user);
-//        }catch (Exception e){
-//            log.info("{can`t replenish the balance");
-//        }
+        userRepository.save(user);
+    }
+    public void payForTicket(User user, BigDecimal replenishmentAmount) {
+        user.setBalance(user.getBalance().subtract(replenishmentAmount));
+        userRepository.save(user);
     }
 
 }

@@ -21,18 +21,6 @@ public class TicketController {
     private UserService userService;
     @Autowired
     private TicketService ticketService;
-//
-//    @GetMapping
-//    public String ticketList(@AuthenticationPrincipal User user,
-//                             Model model) {
-//        try {
-//            model.addAttribute("tickets", ticketService.findAllByPassenger(user));
-//        } catch (Exception e) {
-////            model.addAttribute("tickets", "No tickets yet");
-//        }
-//        return "history";
-//    }
-//
 
     @GetMapping("/tickets/{train}")
     public String makeOrderForm(@PathVariable Train train,
@@ -48,42 +36,18 @@ public class TicketController {
     public String bookTheTicket(
             @AuthenticationPrincipal User user,
             @RequestParam("trainId") Train train,
-            Model model
-    ) {
-        model.addAttribute("train", train);
+            Model model) {
 
+        model.addAttribute("train", train);
         trainService.bookTheTicket(train);
-//        TODO need to be
         return "cart";
     }
     @GetMapping("/history")
     public String getHistory(Model model,
                              @AuthenticationPrincipal User user) {
-        try {
-            model.addAttribute("tickets", ticketService.findAllByPassenger(user));
-        } catch (Exception e) {
-//            model.addAttribute("tickets", "No tickets yet");
-        }
+
+        model.addAttribute("tickets", ticketService.findAllByPassenger(user));
         return "history";
     }
-    @PostMapping("/history")
-    public String getticketList(@AuthenticationPrincipal User user,
-                                Model model) {
-        try {
-            model.addAttribute("tickets", ticketService.findAllByPassenger(user));
-        } catch (Exception e) {
-//            model.addAttribute("tickets", "No tickets yet");
-        }
-        return "history";
-    }
-
-
-//    @RequestMapping(value="/addProduct/{id}",method = RequestMethod.GET)
-//    public String addProduct(@PathVariable("id") Integer id){
-//        Product product = bookService.getProductById(id);
-//        bookService.addProductToBasket(product, 1);
-//        return "redirect:/";
-//    }
-
 
 }

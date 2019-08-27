@@ -1,9 +1,10 @@
 <#import "parts/common.ftl" as c>
+<#import "/spring.ftl" as spring/>
 <@c.page>
     <div class="col-md-6 col-md-offset-3" style="padding-top: 10%">
         <div class="panel panel-default">
             <div class=" panel-heading">
-                <h3 class="panel-title" style="display: inline-block">Edit</h3>
+                <h3 class="panel-title" style="display: inline-block"> <@spring.message "edit"/></h3>
             </div>
             <div class="panel-body">
                 <form action="/user" method="post" style="margin: auto">
@@ -17,7 +18,7 @@
                     </#list>
                     <input type="hidden" value="${user.id}" name="userId">
                     <input type="hidden" value="${_csrf.token}" name="_csrf">
-                    <button type="submit">Save</button>
+                    <button type="submit"><@spring.message "save"/></button>
                 </form>
             </div>
         </div>

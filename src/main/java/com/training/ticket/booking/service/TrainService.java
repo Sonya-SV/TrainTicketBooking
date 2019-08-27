@@ -10,22 +10,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TrainService {
     @Autowired
     private TrainRepository trainRepository;
 
-    public Set<Train> getAllTrainsByRoute(Route route){
-
-        return trainRepository.findAllByRoute(route);
-    }
     public List<Train> findAll(){
 
         return trainRepository.findAll();
     }
-    public Set<Train> getAllTrainsByRouteAndDate(Route route, LocalDate date, LocalTime time){
-        return trainRepository.findAllByRouteAndDepartureDateAndDepartureTimeGreaterThanEqual(route, date, time);
+    public Set<Train> getAllFreeTrainsByRouteAndDate(Route route, LocalDate date, LocalTime time){
+        return trainRepository.findAllByRouteAndDepartureDateAndDepartureTimeGreaterThanEqual(route, date, time)
+                .stream()
+                .filter(train-> train.getFreePlaces()>0)
+                .collect(Collectors.toSet());
     }
 
     public void bookTheTicket(Train train){

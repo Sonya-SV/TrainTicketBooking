@@ -1,13 +1,10 @@
 <#import "parts/common.ftl" as c>
+<#import "/spring.ftl" as spring/>
 <@c.page>
     <div class="container" style="margin-top: 60px">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3" style="padding-top: 50px">
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="/profile">Personal settings </a></li>
-                    <li><a href="/profile/account">Account</a></li>
-                    <li><a href="/history">History</a></li>
-                </ul>
+            <div class="col-md-8 col-md-offset-2" style="padding-top: 50px">
+                <#include "common_profile.ftl">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title" style="display: inline-block">${username!}</h3>
@@ -18,32 +15,32 @@
 
                             <#--                            TODO add check password in profile-->
                             <div class="form-group">
-                                <label id="exampleInputFirstNameLabel" for="firstName">First name</label>
+                                <label id="exampleInputFirstNameLabel" for="firstName"><@spring.message "first.name"/></label>
                                 <input type="text"
                                        class="form-control"
                                        name="firstName"
                                        id="firstName"
-                                       placeholder="First Name"
+                                       placeholder="<@spring.message "first.name"/>"
                                        value="${firstName!}"
                                        required>
                             </div>
                             <div class="form-group">
-                                <label id="exampleInputLastNameLabel" for="lastName">Last name</label>
+                                <label id="exampleInputLastNameLabel" for="lastName"><@spring.message "last.name"/></label>
                                 <input type="text"
                                        class="form-control"
                                        id="lastName"
                                        name="lastName"
-                                       placeholder="Last Name"
+                                       placeholder="<@spring.message "last.name"/>"
                                        value="${lastName!}"
                                        required>
                             </div>
                             <div class="form-group">
-                                <label id="passwordLabel" for="password">Password</label>
+                                <label id="passwordLabel" for="password"><@spring.message "password.label"/></label>
                                 <input type="password"
                                        class="form-control"
                                        id="password"
                                        name="password"
-                                       placeholder="Password"
+                                       placeholder="<@spring.message "password.label"/>"
                                        required>
                                 <div class="text-danger">
                                     ${password2Error!}
@@ -56,7 +53,7 @@
                                        class="form-control"
                                        id="password2"
                                        name="password2"
-                                       placeholder="Password"
+                                       placeholder="<@spring.message "password.label"/>"
                                        required>
                                 <#--                                <#if passwordErrorDiffer??>-->
                                 <div class="text-danger">
@@ -67,7 +64,7 @@
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button type="submit" class="btn btn-success" style="margin-top:30px"
                                     ng-disabled="form.$invalid">
-                                Save
+                                <@spring.message "save"/>
                             </button>
                         </form>
                     </div>

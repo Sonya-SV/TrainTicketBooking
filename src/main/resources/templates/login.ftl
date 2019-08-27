@@ -1,46 +1,47 @@
 <#import "parts/common.ftl" as c>
+<#import "/spring.ftl" as spring/>
 <@c.page>
     <div class="container" style="margin-top: 60px">
         <div class="row">
             <div class="col-md-6 col-md-offset-3" style="padding-top: 50px">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" style="display: inline-block">Login</h3>
+                        <h3 class="panel-title" style="display: inline-block"><@spring.message "log.in"/></h3>
                     </div>
                     <div class="panel-body">
                         <form name="form" action="/login" method="post" autocomplete="off" novalidate
                               ng-submit="form.$valid ">
                             <#if error??>
-                                <h3 style="color: red"> Invalid username or password</h3>
+                                <h3 style="color: red"> <@spring.message "invalid.user"/></h3>
                             </#if>
                             <#if logout??>
-                                <h3 style="color: green"> You are successfully log out</h3>
+                                <h3 style="color: green"> <@spring.message "user.log.out"/></h3>
                             </#if>
 
                             <div class="form-group">
-                                <label id="username" for="username">Username</label>
+                                <label id="username" for="username"><@spring.message "username.label"/></label>
                                 <input type="username"
                                        class="form-control"
                                        name="username"
                                        id="username"
-                                       placeholder="Username"
+                                       placeholder="<@spring.message "username.label"/>"
                                        required>
 
                             </div>
                             <div class="form-group">
-                                <label id="passwordLabel" for="password">Password</label>
+                                <label id="passwordLabel" for="password"><@spring.message "password.label"/></label>
                                 <input type="password"
                                        class="form-control"
                                        id="password"
                                        name="password"
-                                       placeholder="Password"
+                                       placeholder="<@spring.message "log.in"/>"
                                        required>
 
                             </div>
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button type="submit" class="btn btn-success" style="margin-top:30px"
                                     ng-disabled="form.$invalid">
-                                Log in
+                                <@spring.message "log.in"/>
                             </button></form>
                     </div>
                 </div>

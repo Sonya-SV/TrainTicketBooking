@@ -1,14 +1,16 @@
 <#import "parts/common.ftl" as c>
+<#import "/spring.ftl" as spring/>
 <@c.page>
     <#if trains??>
     <table class="table table-bordered  table-hover table-sm" style=" margin: auto;">
     <tr>
-        <th>Number</th>
-        <th>From/To</th>
-        <th>Date</th>
-        <th>Departure
-        <br> Arrival</th>
-        <th>Seats available</th>
+        <th><@spring.message "number"/></th>
+        <th><@spring.message "from"/>/<@spring.message "to"/></th>
+        <th><@spring.message "departure.date"/>/<@spring.message "arrival.date"/>
+        </th>
+        <th><@spring.message "time"/>
+        </th>
+        <th><@spring.message "free.seats"/></th>
     </tr>
         <#list trains as train>
             <tr>
@@ -19,7 +21,7 @@
                     <br>${train.arrivalDate!}</td>
                 <td> ${train.departureTime!}
                 <br>${train.arrivalTime!}</td>
-                <td>${train.freePlaces!}/${train.totalPlaces} <a href="/tickets/${train.id}"> Choose</a></td>
+                <td>${train.freePlaces!}/${train.totalPlaces} <a href="/tickets/${train.id}"> <@spring.message "choose"/></a></td>
             </tr>
         </#list>
     </table>

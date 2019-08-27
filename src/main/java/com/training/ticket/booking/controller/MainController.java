@@ -23,9 +23,8 @@ public class MainController {
 
     @GetMapping("/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-//        Authentication auth =
-                Optional.of(SecurityContextHolder.getContext().getAuthentication())
-                        .ifPresent((auth)-> new SecurityContextLogoutHandler().logout(request, response,auth));
+        Optional.of(SecurityContextHolder.getContext().getAuthentication())
+                .ifPresent((auth) -> new SecurityContextLogoutHandler().logout(request, response, auth));
         return "redirect:/login?logout";
     }
 

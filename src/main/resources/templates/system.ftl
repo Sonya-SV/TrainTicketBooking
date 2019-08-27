@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring/>
 <ul class="nav navbar-nav navbar-right">
     <#--                                TODO rewrite user-->
     <#if name=="">
@@ -7,8 +8,8 @@
         </li>
     <#else>
         <li><a><span class="glyphicon glyphicon-user"></span> Hello, ${name}</a></li>
-        <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart">Cart</span></a></li>
-        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out </a>
+<#--        <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart">Cart</span></a></li>-->
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span><@spring.message "log.out"/> </a>
         </li>
     </#if>
 </ul>

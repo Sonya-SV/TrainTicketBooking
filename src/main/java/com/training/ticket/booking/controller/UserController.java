@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Controller
 //@RequestMapping("/user")
 public class UserController {
 
+    private static final String positiveSum = "It should be greater than 0";
     @Autowired
     private TicketService ticketService;
     private final UserService userService;
@@ -81,20 +83,12 @@ public class UserController {
 
     @PostMapping("/profile/account")
     public String updateAccount(@AuthenticationPrincipal User user,
-                                @RequestParam BigDecimal replenishmentAmount
-    ) {
-
-        userService.updateAccount(user, replenishmentAmount);
+                                @RequestParam BigDecimal replenishmentAmount,
+                                Model model) {
+        Optional.of(replenishmentAmount)
+                .filter(a -> a.compareTo(BigDecimal.ZERO) > 0)
+                .ifPresentOrElse((sum)-> userService.updateAccount(user, sum),
+                        ()->model.addAttribute("errorReplenishmentAmount",positiveSum ));
         return "redirect:/profile/account";
     }
-
-//    @PostMapping("/profile/account")
-//    public String updateAccount(@AuthenticationPrincipal User user,
-//                                @RequestParam BigDecimal replenishmentAmount
-//    ) {
-//
-//        userService.updateAccount(user, replenishmentAmount);
-//        return "redirect:/profile/account";
-//    }
-
 }

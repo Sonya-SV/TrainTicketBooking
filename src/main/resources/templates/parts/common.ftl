@@ -9,19 +9,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <#--        <script type="text/javascript">-->
-        <#--            $(document).ready(function () {-->
-        <#--                $("#locales").change(function () {-->
-        <#--                    var selectedOption = $('#locales').val();-->
-        <#--                    if (selectedOption !== '') {-->
-        <#--                        window.location.replace('locale?lang=' + selectedOption);-->
-        <#--                    }-->
-        <#--                });-->
-        <#--            });-->
-        <#--        </script>-->
+<#--                <script type="text/javascript">-->
+<#--                    $(document).ready(function () {-->
+<#--                        $("#locales").change(function () {-->
+<#--                            var selectedOption = $('#locales').val();-->
+<#--                            if (selectedOption !== '') {-->
+<#--                                window.location.replace('locale?lang=' + selectedOption);-->
+<#--                            }-->
+<#--                        });-->
+<#--                    });-->
+<#--                </script>-->
+        <link rel="icon" href="/locales/polylang/flags/en_US.png" type="image/x-icon">
+        <link rel="icon" href="/locales/polylang/flags/uk.png" type="image/x-icon">
     </head>
     <body data-spy="scroll">
-<#--    <div class="layer" style="overflow: scroll"-->
     <#include "sec.ftl">
     <#include "navbar.ftl">
 
@@ -30,8 +31,6 @@
     </div>
     <div>
         <#include "footer.ftl">
-    </div>
-<#--    </div>-->
     </body>
     </html>
 

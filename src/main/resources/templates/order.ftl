@@ -1,20 +1,21 @@
 <#import "parts/common.ftl" as c>
+<#import "/spring.ftl" as spring/>
 <@c.page>
     <div class="col-md-10 col-md-offset-1" style="padding-top: 10%">
         <div class="panel panel-default">
             <div class=" panel-heading">
-                <h3 class="panel-title" style="display: inline-block">Order tickets</h3>
+                <h3 class="panel-title" style="display: inline-block"><@spring.message "order.tickets"/></h3>
             </div>
             <div class="panel-body">
                 <form action="/cart" method="post" style="margin: auto">
 
                     <div class="form-group">
-                        <label id="exampleInputFirstNameLabel" for="firstName">First name</label>
+                        <label id="exampleInputFirstNameLabel" for="firstName"><@spring.message "first.name"/></label>
                         <input type="text" value="<#if user??>${user.firstName}</#if>"
                                class="form-control"
                                name="firstName"
                                id="firstName"
-                               placeholder="First Name"
+                               placeholder="<@spring.message "first.name"/>"
                                required>
                         <div class="text-danger">
                             ${firstNameError!}
@@ -22,12 +23,12 @@
                     </div>
 
                     <div class="form-group">
-                        <l`abel id="exampleInputLastNameLabel" for="lastName">Last name</label>
+                        <label id="exampleInputLastNameLabel" for="lastName"><@spring.message "last.name"/></label>
                         <input type="text" value="<#if user??>${user.lastName}</#if>"
                                class="form-control"
                                id="lastName"
                                name="lastName"
-                               placeholder="Last Name"
+                               placeholder="<@spring.message "last.name"/>"
                                required>
                         <#--                                <#if lastNameError??>-->
                         <div class="text-danger">
@@ -36,18 +37,18 @@
                     </div>
                     <table class="table table-bordered  table-hover table-sm" style=" margin: auto;">
                         <tr>
-                            <th>Number</th>
-                            <th>From/To</th>
-                            <th>Date</th>
-                            <th>Departure
-                                <br> Arrival
+                            <th><@spring.message "number"/></th>
+                            <th><@spring.message "from"/>/<@spring.message "to"/></th>
+                            <th><@spring.message "departure.date"/>/<@spring.message "arrival.date"/>
                             </th>
-                            <th>Price</th>
+                            <th><@spring.message "time"/>
+                            </th>
+                            <th><@spring.message "price"/></th>
                         </tr>
                         <tr>
                             <td>${train.number!}</td>
-                            <td>${departure!}
-                                <br>${arrival!}</td>
+                            <td>${train.route.departure!}
+                                <br>${train.route.arrival!}</td>
                             <td>${train.departureDate!}
                                 <br>${train.arrivalDate!}</td>
                             <td> ${train.departureTime!}
@@ -58,7 +59,7 @@
 
                     <input type="hidden" value="${train.id}" name="trainId">
                     <input type="hidden" value="${_csrf.token}" name="_csrf">
-                    <button type="submit">Add to Cart</button>
+                    <button type="submit"><@spring.message "add.to.cart"/></button>
                 </form>
             </div>
         </div>

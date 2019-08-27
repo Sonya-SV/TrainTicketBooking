@@ -54,7 +54,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @Column(name = "balance", columnDefinition="Decimal(10,2) default '0.00'")
-    private BigDecimal balance;
+    private BigDecimal balance=BigDecimal.ZERO;
 
     @OneToMany( mappedBy = "passenger",  cascade = CascadeType.MERGE, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Ticket> tickets;
