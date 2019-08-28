@@ -1,6 +1,7 @@
 package com.training.ticket.booking.service;
 
 import com.training.ticket.booking.entity.Ticket;
+import com.training.ticket.booking.entity.Train;
 import com.training.ticket.booking.entity.User;
 import com.training.ticket.booking.repository.TicketRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,9 @@ public class TicketService {
         }catch (DataIntegrityViolationException e){
             log.info("can`t save ticket");
         }
+    }
+    public Set<Ticket> findAllTicketsByTrain(Train train){
+        return ticketRepository.findAllByTrain(train);
     }
 
 }

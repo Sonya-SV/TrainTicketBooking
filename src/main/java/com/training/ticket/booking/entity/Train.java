@@ -17,7 +17,8 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "train")
+@Table(name = "train",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"number"})})
 public class Train {
 
     @Id
@@ -43,15 +44,15 @@ public class Train {
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
-    @Column(name = "free_places", columnDefinition = "default = 0")
+    @Column(name = "free_places")
     private int freePlaces;
 
-    @Column(name = "total_places", columnDefinition = "default = 0")
+    @Column(name = "total_places")
     private int totalPlaces;
 
-    @Column(name = "price", columnDefinition = "default = 0")
+    @Column(name = "price")
     private BigDecimal price;
 
-    @OneToMany( mappedBy = "train",  cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany( mappedBy = "train",  cascade = CascadeType.MERGE, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Ticket> tickets;
 }

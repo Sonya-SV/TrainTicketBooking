@@ -34,7 +34,7 @@
                                        class="form-control"
                                        id="password"
                                        name="password"
-                                       placeholder="<@spring.message "log.in"/>"
+                                       placeholder="<@spring.message "password.label"/>"
                                        required>
 
                             </div>

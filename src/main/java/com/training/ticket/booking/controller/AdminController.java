@@ -2,7 +2,9 @@ package com.training.ticket.booking.controller;
 
 import com.training.ticket.booking.entity.Role;
 import com.training.ticket.booking.entity.User;
+import com.training.ticket.booking.service.TicketService;
 import com.training.ticket.booking.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ import java.util.Map;
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/user")
 public class AdminController {
+
+    @Autowired
+    private TicketService ticketService;
 
     private final UserService userService;
 
@@ -48,5 +53,11 @@ public class AdminController {
 
         userService.updateUserByAdmin(user, username, form);
         return "redirect:/user";
+    }
+    @GetMapping("/history/{user}")
+    public String getHistoryForUser(@PathVariable User user, Model model) {
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("tickets", ticketService.findAllByPassenger(user));
+        return "userEdit";
     }
 }

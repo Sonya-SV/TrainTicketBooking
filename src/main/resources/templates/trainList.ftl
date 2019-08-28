@@ -15,8 +15,8 @@
         <#list trains as train>
             <tr>
                 <td>${train.number!}</td>
-                <td>${departure!}
-                    <br>${arrival!}</td>
+                <td>${train.route.departure!}
+                    <br>${train.route.arrival!}</td>
                 <td>${train.departureDate!}
                     <br>${train.arrivalDate!}</td>
                 <td> ${train.departureTime!}
@@ -25,9 +25,6 @@
             </tr>
         </#list>
     </table>
-        <#else>
-<#--        <div class="alert"> No trains found! </div> TODO rewrite-->
     </#if>
-
 
 </@c.page>

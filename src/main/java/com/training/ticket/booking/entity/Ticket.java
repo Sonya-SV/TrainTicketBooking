@@ -23,14 +23,12 @@ public class Ticket {
     private String firstName;
     private String lastName;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "train_id", nullable = false)
     private Train train;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE , fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User passenger;
-
-//    private boolean payed;
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -30,8 +31,8 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String getProfile(Model model, @AuthenticationPrincipal User user) { // do not to get from db
-        model.addAttribute("username", user.getUsername());
+    public String getProfile(Model model, @AuthenticationPrincipal User user) {
+
         model.addAttribute("firstName", user.getFirstName());
         model.addAttribute("lastName", user.getLastName());
         return "profile";
@@ -40,38 +41,35 @@ public class UserController {
     @PostMapping("/profile")
     public String updateProfile(@Valid User user,
                                 BindingResult bindingResult,
-//                                @AuthenticationPrincipal User user,
-//                                @RequestParam String password,
-//                                @RequestParam String password2,
-//                                @RequestParam String firstName,
-//                                @RequestParam String lastName,
+                                @RequestParam String password,
+                                @RequestParam String password2,
+                                @AuthenticationPrincipal User oldUser,
                                 Model model
 
     ) {
-//        boolean errorExist = false;
-//        if (user.getPassword() != null && !user.getPassword().equals(validuser.getPassword2())) {
-//            model.addAttribute("passwordErrorDiffer", "Passwords are different!");
-//            errorExist = true;
-//        }
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> errors = ValidController.getErrors(bindingResult);
-//            model.mergeAttributes(errors);
-//            errorExist = true;
-//        }
-//        if (password.equals(password2)) {
-//            model.addAttribute("passwordErrorDiffer", "Passwords are different!");
-//            errorExist=true;
-//        }
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> errors = ValidController.getErrors(bindingResult);
-//            model.mergeAttributes(errors);
-//            errorExist=true;
-////            return "reg";
-//        }
-//
-//        if (errorExist)
-//            return "profile";
-//        userService.updateProfile(user, validuser.getFirstName(), validuser.getLastName(), validuser.getPassword());
+        model.addAttribute("firstName", user.getFirstName());
+        model.addAttribute("lastName", user.getLastName());
+        boolean errorExist = false;
+
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = ValidController.getErrors(bindingResult);
+            model.mergeAttributes(errors);
+            errorExist = true;
+        }
+        if (!password.equals(password2)) {
+            model.addAttribute("passwordErrorDiffer", "Passwords are different!");
+            errorExist=true;
+        }
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = ValidController.getErrors(bindingResult);
+            model.mergeAttributes(errors);
+            errorExist=true;
+        }
+
+        if (errorExist)
+            return "profile";
+        userService.updateProfile(oldUser, user.getFirstName(), user.getLastName(), user.getPassword());
+//        model.addAttribute("successSave", "successfully saved!");
         return "redirect:/profile";
     }
 

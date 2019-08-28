@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Set;
@@ -23,21 +24,16 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-//TODO add validation
-
     @Column(name = "username", nullable = false)
-//    @NotBlank(message = "Username cannot be empty")
+    @NotBlank(message = "Username cannot be empty")
     private String username;
 
     @Column(name = "first_name", nullable = false)
-//    @NotBlank(message = "First name cannot be empty")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
-//    @NotBlank(message = "Last name cannot be empty")
     private String lastName;
 
     @Column(name = "password", nullable = false)
@@ -56,7 +52,7 @@ public class User implements UserDetails {
     @Column(name = "balance", columnDefinition="Decimal(10,2) default '0.00'")
     private BigDecimal balance=BigDecimal.ZERO;
 
-    @OneToMany( mappedBy = "passenger",  cascade = CascadeType.MERGE, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany( mappedBy = "passenger",  cascade = CascadeType.MERGE , fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Ticket> tickets;
 
     @Override

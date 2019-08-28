@@ -45,9 +45,9 @@ public class TicketController {
     @GetMapping("/history")
     public String getHistory(Model model,
                              @AuthenticationPrincipal User user) {
-
         model.addAttribute("tickets", ticketService.findAllByPassenger(user));
         return "history";
     }
+
 
 }

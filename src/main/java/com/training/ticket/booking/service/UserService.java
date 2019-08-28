@@ -52,12 +52,16 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    //TODO rewrite Optional!!!
     public void updateProfile(User user, String firstName, String lastName, String password) {
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        user.setPassword(passwordEncoder.encode(user.getPassword())); /// was password <- user.getPassword
-        userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(password));
+        try {
+            userRepository.save(user);
+        }catch(Exception e){
+            log.info("{can`t save user}");
+            log.info("{}", user);
+        }
     }
 
     public void saveNewUser(User user) {

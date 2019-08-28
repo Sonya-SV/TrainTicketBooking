@@ -16,12 +16,47 @@
                             </label>
                         </div>
                     </#list>
+
                     <input type="hidden" value="${user.id}" name="userId">
                     <input type="hidden" value="${_csrf.token}" name="_csrf">
                     <button type="submit"><@spring.message "save"/></button>
                 </form>
+                <a href="/user/history/${user.id}"><@spring.message "history"/></a>
+
             </div>
         </div>
     </div>
+    <div class="col-md-6 col-md-offset-3">
+        <#if tickets??>
 
+            <table class="table table-bordered  table-hover table-sm" style=" margin: auto;">
+                <tr>
+                    <th><@spring.message "passenger"/></th>
+                    <th><@spring.message "number"/></th>
+                    <th><@spring.message "from"/>/<@spring.message "to"/></th>
+                    <th><@spring.message "departure.date"/>/<@spring.message "arrival.date"/>
+                    </th>
+                    <th><@spring.message "time"/>
+                    </th>
+                </tr>
+                <#list tickets as ticket>
+                    <tr>
+                        <td>${ticket.firstname!}
+                            <br>${ticket.lastName!}
+                        </td>
+                        <td>${ticket.train.number!}</td>
+                        <td>${ticket.train.route.departure!}
+                            <br>${ticket.train.route.arrival!}
+                        </td>
+                        <td>${ticket.train.departureDate!}
+                            <br>${ticket.train.arrivalDate!}</td>
+                        <td> ${ticket.train.departureTime!}
+                            <br>${ticket.train.arrivalTime!}</td>
+                    </tr>
+                </#list>
+
+            </table>
+
+        </#if>
+    </div>
 </@c.page>

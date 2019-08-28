@@ -15,7 +15,8 @@
 
                             <#--                            TODO add check password in profile-->
                             <div class="form-group">
-                                <label id="exampleInputFirstNameLabel" for="firstName"><@spring.message "first.name"/></label>
+                                <label id="exampleInputFirstNameLabel"
+                                       for="firstName"><@spring.message "first.name"/></label>
                                 <input type="text"
                                        class="form-control"
                                        name="firstName"
@@ -25,7 +26,8 @@
                                        required>
                             </div>
                             <div class="form-group">
-                                <label id="exampleInputLastNameLabel" for="lastName"><@spring.message "last.name"/></label>
+                                <label id="exampleInputLastNameLabel"
+                                       for="lastName"><@spring.message "last.name"/></label>
                                 <input type="text"
                                        class="form-control"
                                        id="lastName"
@@ -41,6 +43,7 @@
                                        id="password"
                                        name="password"
                                        placeholder="<@spring.message "password.label"/>"
+                                       value="${password!}"
                                        required>
                                 <div class="text-danger">
                                     ${password2Error!}
@@ -54,12 +57,16 @@
                                        id="password2"
                                        name="password2"
                                        placeholder="<@spring.message "password.label"/>"
+                                       value="${password!}"
                                        required>
                                 <#--                                <#if passwordErrorDiffer??>-->
                                 <div class="text-danger">
                                     ${password2Error!}
                                     ${passwordErrorDiffer!}
                                 </div>
+                            </div>
+                            <div class="text-success">
+                                ${successSave!}
                             </div>
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button type="submit" class="btn btn-success" style="margin-top:30px"

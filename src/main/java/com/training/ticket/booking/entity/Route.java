@@ -21,7 +21,7 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany( mappedBy = "route",  cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany( mappedBy = "route",  cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Train> trains;
 
     @Column(name="departure", nullable = false)

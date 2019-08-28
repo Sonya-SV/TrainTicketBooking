@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
 public class MainController {
 
     @GetMapping("/")
-    public String greeting(Map<String, Object> model) {
+    public String greeting() {
         return "greeting";
     }
 
@@ -37,10 +36,4 @@ public class MainController {
         model.addAttribute("logout", logout);
         return "login";
     }
-
-//    @RequestMapping(value = "/locale", method = RequestMethod.GET)
-//    public String getLocalePage() {
-//        return "my-locale";
-//    }
-
 }

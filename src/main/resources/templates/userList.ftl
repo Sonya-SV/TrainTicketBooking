@@ -24,7 +24,6 @@
                                         ${role}<#sep>, </#list>
                                 </td>
                                 <td><a href="/user/${user.id}"> <@spring.message "edit"/></a></td>
-<#--                                <td><a href="/history/${user.train.id}"> Edit</a></td>-->
                             </tr>
                         </#list>
                     </#if>
